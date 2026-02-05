@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ibrahim Samad Browser - Account</title>
+    <style>
+        :root {
+            --accent-color: #a855f7;
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-header {
+            margin-bottom: 30px;
+        }
+
+        .avatar-large {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin: 0 auto 20px;
+            padding: 3px;
+            background: var(--bg);
+            box-shadow: 0 0 20px color-mix(in srgb, var(--accent-color) 20%, transparent);
+        }
+
+        .avatar-large img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        p.email {
+            color: var(--text-dim);
+            margin: 5px 0 0;
+            font-size: 14px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .sync-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .sync-info {
+            font-size: 14px;
+        }
+
+        .sync-status {
+            font-size: 12px;
+            color: #238636;
+            font-weight: 600;
+        }
+
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-google:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-signout {
+            background: transparent;
+            color: #f85149;
+            border: 1px solid rgba(248, 81, 73, 0.3);
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .btn-signout:hover {
+            background: rgba(248, 81, 73, 0.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="profile-header">
+            <div class="avatar-large">
+                <img id="profileImg" src="https://ui-avatars.com/api/?name=User&background=random" alt="Avatar">
+            </div>
+            <h1 id="profileName">Guest User</h1>
+            <p class="email" id="profileEmail">Sign in to sync your data</p>
+        </div>
+
+        <div id="loggedOutSection">
+            <button class="btn-google" id="btnSignIn">
+                <svg width="18" height="18" viewBox="0 0 18 18">
+                    <path
+                        d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"
+                        fill="#4285f4" />
+                    <path
+                        d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z"
+                        fill="#34a853" />
+                    <path
+                        d="M3.964 10.706c-.18-.54-.282-1.117-.282-1.706s.102-1.166.282-1.706V4.962H.957C.347 6.177 0 7.551 0 9s.347 2.823.957 4.038l3.007-2.332z"
+                        fill="#fbbc05" />
+                    <path
+                        d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.582C13.463.891 11.426 0 9 0 5.483 0 2.443 2.017.957 4.962l3.007 2.332C4.672 5.164 6.656 3.58 9 3.58z"
+                        fill="#ea4335" />
+                </svg>
+                Sign in with Google
+            </button>
+        </div>
+
+        <div id="loggedInSection" class="hidden">
+            <div class="card">
+                <div class="card-title">Browser Sync</div>
+                <div class="sync-row">
+                    <div class="sync-info">Bookmarks</div>
+                    <div class="sync-status">Synced</div>
+                </div>
+                <div class="sync-row">
+                    <div class="sync-info">History</div>
+                    <div class="sync-status">Synced</div>
+                </div>
+                <div class="sync-row">
+                    <div class="sync-info">Settings</div>
+                    <div class="sync-status">Synced</div>
+                </div>
+            </div>
+            <button class="btn-signout" id="btnSignOut">Sign Out</button>
+        </div>
+    </div>
+
+    <script>
+        // Use window.ISB to interact with main process if needed
+        let user = null;
+
+        async function init() {
+            const settings = await window.ISB.getSettings();
+            user = settings.user || null;
+            updateUI();
+
+            // Apply accent color
+            if (settings.accentColor) {
+                document.documentElement.style.setProperty('--accent-color', settings.accentColor);
+            }
+        }
+
+        function updateUI() {
+            if (user) {
+                document.getElementById('profileName').textContent = user.name;
+                document.getElementById('profileEmail').textContent = user.email;
+                document.getElementById('profileImg').src = user.avatar;
+                document.getElementById('loggedOutSection').classList.add('hidden');
+                document.getElementById('loggedInSection').classList.remove('hidden');
+            } else {
+                document.getElementById('profileName').textContent = 'Guest User';
+                document.getElementById('profileEmail').textContent = 'Sign in to sync your data';
+                document.getElementById('profileImg').src = 'https://ui-avatars.com/api/?name=User&background=random';
+                document.getElementById('loggedOutSection').classList.remove('hidden');
+                document.getElementById('loggedInSection').classList.add('hidden');
+            }
+        }
+
+        document.getElementById('btnSignIn').addEventListener('click', () => {
+            // Real navigation to Google Sign In
+            window.location.href = 'https://accounts.google.com/ServiceLogin';
+        });
+
+        // Poll for identity changes (in case user logs in via another tab)
+        setInterval(async () => {
+            const settings = await window.ISB.getSettings();
+            if (JSON.stringify(settings.user) !== JSON.stringify(user)) {
+                user = settings.user;
+                updateUI();
+            }
+        }, 2000);
+
+        document.getElementById('btnSignOut').addEventListener('click', async () => {
+            user = null;
+            const settings = await window.ISB.getSettings();
+            settings.user = null;
+            await window.ISB.saveSettings(settings);
+            updateUI();
+        });
+
+        init();
+    </script>
+</body>
+
+</html>

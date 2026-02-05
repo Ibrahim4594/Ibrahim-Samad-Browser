@@ -1,0 +1,37 @@
+{
+  "name": "ibrahim-samad-browser",
+  "version": "1.0.0",
+  "description": "Ibrahim Samad Browser – A premium desktop web browser",
+  "main": "main.js",
+  "author": "Ibrahim Samad",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.isb.ibrahim-samad-browser",
+    "productName": "Ibrahim Samad Browser",
+    "copyright": "Ibrahim Samad",
+    "icon": "icon.ico",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": "x64"
+        }
+      ],
+      "publisherName": "Ibrahim Samad"
+    },
+    "nsis": {
+      "installerIcon": "icon.ico",
+      "shortcutName": "Ibrahim Samad Browser",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "perMachine": false
+    }
+  }
+}

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings</title>
+  <style>
+    /* ── Variables & Reset ── */
+    :root {
+      --bg-deep: #0d1117;
+      --bg-card: rgba(22, 27, 34, 0.7);
+      --border: rgba(48, 54, 61, 0.6);
+      --text-primary: #e6edf3;
+      --text-secondary: #8b949e;
+      --accent: #d2a8ff;
+      --accent-glow: rgba(210, 168, 255, 0.15);
+      --danger: #f85149;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      outline: none;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 100% 100%, rgba(210, 168, 255, 0.05) 0%, transparent 40%);
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      overflow-y: scroll;
+    }
+
+    /* ── Container ── */
+    .container {
+      width: 100%;
+      max-width: 680px;
+      margin: 60px 20px;
+      animation: fadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      border-radius: 18px;
+      margin: 0 auto 16px;
+      box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #e6dfec, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-top: 6px;
+    }
+
+    /* ── Card Sections ── */
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .sec-title {
+      padding: 20px 24px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .info {
+      flex: 1;
+      padding-right: 20px;
+    }
+
+    .label {
+      font-size: 15px;
+      font-weight: 500;
+      color: #f0f6fc;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    /* ── Controls ── */
+
+    /* Toggle Switch */
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      cursor: pointer;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      background: #30363d;
+      transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border: 1px solid #484f58;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    input:checked+.slider {
+      background: #a855f7;
+      border-color: #a855f7;
+    }
+
+    input:checked+.slider::before {
+      transform: translateX(22px);
+    }
+
+    /* Select */
+    select.ctrl {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      color: #e6edf3;
+      padding: 8px 30px 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      transition: border-color 0.2s;
+    }
+
+    select.ctrl:hover {
+      border-color: #8b949e;
+    }
+
+    select.ctrl:focus {
+      border-color: #a855f7;
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    /* Input */
+    input.ctrl {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      color: #e6edf3;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      width: 220px;
+      transition: border-color 0.2s;
+    }
+
+    input.ctrl:focus {
+      border-color: #a855f7;
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    input.ctrl::placeholder {
+      color: #484f58;
+    }
+
+    /* Danger Button */
+    .btn-danger {
+      background: rgba(248, 81, 73, 0.1);
+      border: 1px solid rgba(248, 81, 73, 0.4);
+      color: #ff7b72;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-danger:hover {
+      background: rgba(248, 81, 73, 0.2);
+      border-color: #ff7b72;
+    }
+
+    .btn-danger:active {
+      transform: scale(0.97);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #21262d;
+      color: #484f58;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="header-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
+        </svg>
+      </div>
+      <h1>Settings</h1>
+      <p>Customize your Ibrahim Samad Browser experience</p>
+    </header>
+
+    <!-- Appearance -->
+    <div class="card">
+      <div class="sec-title">Appearance</div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Glass Tint</span>
+          <span class="desc">Apply a frosted-glass effect to the top bar and panels.</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="chkGlass">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Smooth Animations</span>
+          <span class="desc">Enable fluid transitions for UI elements.</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="chkAnim">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Bookmarks Bar</span>
+          <span class="desc">Always show the bookmarks bar below the address bar.</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="chkBmBar">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Vertical Tabs</span>
+          <span class="desc">Move the tab bar to the left side of the window.</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="chkVerticalTabs">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Theme Color</span>
+          <span class="desc">Pick your favorite accent color.</span>
+        </div>
+        <input type="color" id="inpAccent" class="ctrl"
+          style="padding:0; width:60px; height:32px; cursor:pointer; background:none; border:none;">
+      </div>
+    </div>
+
+    <!-- Search & Startup -->
+    <div class="card">
+      <div class="sec-title">Search & Startup</div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Search Engine</span>
+          <span class="desc">Default engine used in the address bar.</span>
+        </div>
+        <select id="selEngine" class="ctrl">
+          <option value="google">Google</option>
+          <option value="bing">Bing</option>
+          <option value="duckduckgo">DuckDuckGo</option>
+          <option value="yahoo">Yahoo</option>
+        </select>
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Homepage URL</span>
+          <span class="desc">The page to load when you click Home or start up.</span>
+        </div>
+        <input id="inpHomepage" class="ctrl" type="text" placeholder="https://google.com" spellcheck="false" />
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">On Startup</span>
+          <span class="desc">Choose what to show when the browser launches.</span>
+        </div>
+        <select id="selStartup" class="ctrl">
+          <option value="newtab">Open New Tab</option>
+          <option value="homepage">Open Homepage</option>
+          <option value="restore">Restore Last Session</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Privacy -->
+    <div class="card">
+      <div class="sec-title">Privacy & Data</div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Ad-Blocker Lite</span>
+          <span class="desc">Block common ads and tracking scripts.</span>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="chkAdBlock">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Browsing History</span>
+          <span class="desc">Permanently delete your browsing history logs.</span>
+        </div>
+        <button class="btn-danger" id="btnClearHist">Clear History</button>
+      </div>
+
+      <div class="item">
+        <div class="info">
+          <span class="label">Cache & Cookies</span>
+          <span class="desc">Delete temporary files and site cookies.</span>
+        </div>
+        <button class="btn-danger" id="btnClearCache">Clear Data</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      Ibrahim Samad Browser v1.0.0 &middot; Built with Electron
+    </div>
+
+  </div>
+
+  <script>
+    (async function () {
+      const api = window.ISB;
+      let settings = await api.getSettings();
+
+      // Populate logic
+      document.getElementById('chkGlass').checked = settings.glassTint !== false;
+      document.getElementById('chkAnim').checked = settings.animations !== false;
+      document.getElementById('chkBmBar').checked = settings.showBookmarksBar !== false;
+      document.getElementById('chkVerticalTabs').checked = settings.verticalTabs === true;
+      document.getElementById('inpAccent').value = settings.accentColor || '#a855f7';
+      if (settings.accentColor) document.documentElement.style.setProperty('--accent-color', settings.accentColor);
+      document.getElementById('chkAdBlock').checked = settings.adBlock === true;
+      document.getElementById('selEngine').value = settings.searchEngine || 'google';
+      document.getElementById('inpHomepage').value = settings.homepage || '';
+      document.getElementById('selStartup').value = settings.startupBehavior || 'newtab';
+
+      // Save logic
+      async function save() {
+        settings.glassTint = document.getElementById('chkGlass').checked;
+        settings.animations = document.getElementById('chkAnim').checked;
+        settings.showBookmarksBar = document.getElementById('chkBmBar').checked;
+        settings.verticalTabs = document.getElementById('chkVerticalTabs').checked;
+        settings.accentColor = document.getElementById('inpAccent').value;
+        document.documentElement.style.setProperty('--accent-color', settings.accentColor);
+        settings.adBlock = document.getElementById('chkAdBlock').checked;
+        settings.searchEngine = document.getElementById('selEngine').value;
+        settings.homepage = document.getElementById('inpHomepage').value.trim();
+        settings.startupBehavior = document.getElementById('selStartup').value;
+        await api.saveSettings(settings);
+      }
+
+      // Event listeners
+      document.getElementById('chkGlass').addEventListener('change', save);
+      document.getElementById('chkAnim').addEventListener('change', save);
+      document.getElementById('chkBmBar').addEventListener('change', save);
+      document.getElementById('chkVerticalTabs').addEventListener('change', save);
+      document.getElementById('inpAccent').addEventListener('input', save);
+      document.getElementById('chkAdBlock').addEventListener('change', save);
+      document.getElementById('selEngine').addEventListener('change', save);
+      document.getElementById('inpHomepage').addEventListener('input', save);
+      document.getElementById('selStartup').addEventListener('change', save);
+
+      // Clear buttons
+      document.getElementById('btnClearHist').addEventListener('click', () => {
+        if (confirm("Are you sure you want to clear your history?")) {
+          api.clearHistory();
+          alert("History cleared.");
+        }
+      });
+      document.getElementById('btnClearCache').addEventListener('click', () => {
+        if (confirm("Are you sure you want to clear cache and cookies?")) {
+          api.clearCache();
+          alert("Cache cleared.");
+        }
+      });
+
+    })();
+  </script>
+
+</body>
+
+</html>

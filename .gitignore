@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+dist/
+*.log
+.gemini/
+brain/
+*.tmp
+package-lock.json

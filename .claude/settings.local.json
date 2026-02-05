@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e:*)",
+      "Bash(ls:*)",
+      "Bash(node:*)",
+      "Bash(node --check:*)",
+      "Bash(npx electron test-debug.js)",
+      "Bash(npm install:*)",
+      "Bash(npx electron-builder:*)",
+      "WebSearch",
+      "WebFetch(domain:dribbble.com)",
+      "WebFetch(domain:characterz.design)",
+      "WebFetch(domain:getillustrations.com)",
+      "Bash(TPATH=\"/c/Users/ibrah/.claude/projects/C--Users-ibrah-OneDrive-Desktop-browser-testing/338c75a1-131c-4131-8bcc-410594a0dddc.jsonl\")",
+      "Bash(npm run build:*)"
+    ]
+  }
+}
